@@ -1,5 +1,5 @@
 {
   "routes": [
-    { "src": "/", "dest": "/airah-hospital.html" }
+    { "src": "/", "dest": "/index.html" }
   ]
 }
