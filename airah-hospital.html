@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airah Hospital – Multi-Speciality & Maternity Care Centre, Nuh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a2342;
+    --blue: #1a5276;
+    --sky: #2e86c1;
+    --teal: #1abc9c;
+    --mint: #d5f5e3;
+    --white: #ffffff;
+    --offwhite: #f8fafd;
+    --light: #eaf3fb;
+    --muted: #6b8cae;
+    --text: #1a2e45;
+    --subtext: #4a6580;
+    --border: #d0e4f5;
+    --gold: #c8a96e;
+    --shadow-sm: 0 4px 20px rgba(10,35,66,0.08);
+    --shadow-md: 0 12px 48px rgba(10,35,66,0.13);
+    --shadow-lg: 0 24px 72px rgba(10,35,66,0.18);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--offwhite); }
+  ::-webkit-scrollbar-thumb { background: var(--sky); border-radius: 99px; }
+
+  /* ── UTILITY ── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--sky); margin-bottom: 12px;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 28px; height: 2px; background: var(--gold); border-radius: 2px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600; line-height: 1.2;
+    color: var(--navy);
+  }
+  .section-sub {
+    font-size: 1rem; color: var(--subtext); line-height: 1.75;
+    max-width: 580px; margin-top: 12px;
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 0 24px;
+    transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(255,255,255,0.97);
+    box-shadow: 0 2px 32px rgba(10,35,66,0.1);
+    backdrop-filter: blur(12px);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    transition: height 0.4s;
+  }
+  nav.scrolled .nav-inner { height: 64px; }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--sky), var(--teal));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; box-shadow: 0 4px 16px rgba(30,134,193,0.35);
+    flex-shrink: 0;
+  }
+  .nav-logo-text { line-height: 1.1; }
+  .nav-logo-text strong {
+    display: block; font-size: 18px; font-weight: 700;
+    color: var(--navy); font-family: 'Cormorant Garamond', serif; font-size: 20px;
+  }
+  .nav-logo-text span { font-size: 11px; color: var(--muted); font-weight: 500; letter-spacing: 0.5px; }
+  .nav-links { display: flex; align-items: center; gap: 4px; }
+  .nav-links a {
+    padding: 8px 16px; border-radius: 8px;
+    text-decoration: none; font-size: 14px; font-weight: 500;
+    color: var(--subtext); transition: all 0.2s;
+  }
+  nav.scrolled .nav-links a { color: var(--text); }
+  .nav-links a:hover { color: var(--sky); background: var(--light); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--sky), var(--blue)) !important;
+    color: white !important; padding: 10px 22px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 16px rgba(30,134,193,0.3);
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(30,134,193,0.4) !important; background: var(--light) !important; color: white !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(135deg, rgba(10,35,66,0.88) 0%, rgba(26,82,118,0.75) 50%, rgba(30,134,193,0.55) 100%);
+    z-index: 1;
+  }
+  .hero-svg-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(160deg, #0a2342 0%, #1a5276 45%, #2e86c1 80%, #1abc9c 100%);
+  }
+  /* Animated shapes */
+  .hero-shapes { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .hero-shapes .shape {
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    animation: float 8s ease-in-out infinite;
+  }
+  .hero-shapes .shape:nth-child(1) { width: 500px; height: 500px; top: -100px; right: -100px; animation-delay: 0s; }
+  .hero-shapes .shape:nth-child(2) { width: 300px; height: 300px; bottom: 10%; left: 5%; animation-delay: -3s; }
+  .hero-shapes .shape:nth-child(3) { width: 200px; height: 200px; top: 40%; right: 20%; animation-delay: -6s; }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    padding-top: 100px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(26,188,156,0.2); border: 1px solid rgba(26,188,156,0.4);
+    border-radius: 100px; padding: 6px 16px;
+    font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: #7eecd0; margin-bottom: 24px;
+    animation: fadeInDown 0.8s ease forwards;
+  }
+  .hero-badge::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 600; line-height: 1.1;
+    color: white; margin-bottom: 20px;
+    animation: fadeInUp 0.9s 0.15s ease both;
+  }
+  .hero-title em { font-style: normal; color: #7eecd0; }
+  .hero-subtitle {
+    font-size: 1.1rem; color: rgba(255,255,255,0.75); line-height: 1.75;
+    margin-bottom: 36px;
+    animation: fadeInUp 0.9s 0.3s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeInUp 0.9s 0.45s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--teal), #16a085);
+    color: white; padding: 15px 30px; border-radius: 12px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    box-shadow: 0 8px 32px rgba(26,188,156,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(26,188,156,0.5); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.35);
+    color: white; padding: 15px 30px; border-radius: 12px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    backdrop-filter: blur(8px);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+  .hero-stats {
+    display: flex; gap: 24px; margin-top: 48px;
+    animation: fadeInUp 0.9s 0.6s ease both;
+  }
+  .hero-stat {
+    text-align: center; padding: 16px 20px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px; backdrop-filter: blur(8px);
+    flex: 1;
+  }
+  .hero-stat strong { display: block; font-size: 1.8rem; font-weight: 700; color: white; font-family: 'Cormorant Garamond', serif; }
+  .hero-stat span { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 16px;
+    animation: fadeInRight 1s 0.3s ease both;
+  }
+  .hero-card-main {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; padding: 28px; backdrop-filter: blur(12px);
+    position: relative; overflow: hidden;
+  }
+  .hero-card-main::before {
+    content: '🏥';
+    position: absolute; right: 20px; top: 20px; font-size: 3rem; opacity: 0.15;
+  }
+  .hero-card-main h3 { color: white; font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+  .hero-card-main p { color: rgba(255,255,255,0.65); font-size: 0.875rem; }
+  .hero-cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .hero-mini-card {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px; padding: 20px; backdrop-filter: blur(8px);
+    display: flex; flex-direction: column; gap: 8px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .hero-mini-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-4px); }
+  .hero-mini-card .icon { font-size: 24px; }
+  .hero-mini-card strong { color: white; font-size: 0.875rem; font-weight: 600; }
+  .hero-mini-card span { color: rgba(255,255,255,0.55); font-size: 0.75rem; }
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll span { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; }
+  .hero-scroll-arrow { width: 2px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent); }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+  @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeInRight { from{opacity:0;transform:translateX(40px)} to{opacity:1;transform:translateX(0)} }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--navy);
+    padding: 20px 0;
+    overflow: hidden;
+  }
+  .trust-bar-inner {
+    display: flex; gap: 48px; align-items: center;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+    font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .trust-item span { color: var(--teal); font-size: 16px; }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ── ABOUT ── */
+  #about { padding: 100px 0; background: var(--offwhite); position: relative; overflow: hidden; }
+  #about::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,134,193,0.06), transparent 70%);
+  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-visual {
+    position: relative;
+  }
+  .about-img-wrapper {
+    position: relative; border-radius: 24px; overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .about-img-placeholder {
+    width: 100%; height: 420px;
+    background: linear-gradient(135deg, #0a2342 0%, #1a5276 50%, #2e86c1 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+  }
+  .about-img-placeholder .big-icon { font-size: 80px; opacity: 0.3; }
+  .about-img-placeholder p { color: rgba(255,255,255,0.5); font-size: 13px; text-align: center; max-width: 200px; }
+  .about-badge-float {
+    position: absolute; bottom: -20px; right: -20px;
+    background: white; border-radius: 16px; padding: 20px 24px;
+    box-shadow: var(--shadow-md);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .about-badge-float .num { font-size: 2rem; font-weight: 700; color: var(--navy); font-family: 'Cormorant Garamond', serif; }
+  .about-badge-float .lbl { font-size: 11px; color: var(--muted); font-weight: 500; }
+  .about-badge-float .icon-circle {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--sky), var(--teal));
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+    box-shadow: 0 6px 20px rgba(30,134,193,0.3);
+  }
+  .about-content { }
+  .about-features { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .about-feature {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px; background: white; border-radius: 14px;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .about-feature:hover { transform: translateX(6px); box-shadow: var(--shadow-md); }
+  .about-feature-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    background: var(--light); display: flex; align-items: center; justify-content: center; font-size: 20px;
+  }
+  .about-feature h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .about-feature p { font-size: 13px; color: var(--subtext); line-height: 1.6; }
+
+  /* ── SERVICES ── */
+  #services { padding: 100px 0; }
+  .services-header { text-align: center; margin-bottom: 64px; }
+  .services-header .section-label { justify-content: center; }
+  .services-header .section-sub { margin: 0 auto; text-align: center; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .service-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px 24px;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    cursor: default;
+  }
+  .service-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--sky), var(--teal));
+    opacity: 0; transition: opacity 0.35s;
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+  .service-card > * { position: relative; z-index: 1; }
+  .service-icon {
+    width: 64px; height: 64px; border-radius: 16px;
+    background: var(--light); margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: center; font-size: 28px;
+    transition: background 0.3s;
+  }
+  .service-card:hover .service-icon { background: rgba(255,255,255,0.2); }
+  .service-card h3 {
+    font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+  .service-card:hover h3 { color: white; }
+  .service-card p {
+    font-size: 13px; color: var(--subtext); line-height: 1.65;
+    transition: color 0.3s;
+  }
+  .service-card:hover p { color: rgba(255,255,255,0.85); }
+  .service-arrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px; font-size: 12px; font-weight: 600;
+    color: var(--sky); letter-spacing: 0.5px;
+    transition: color 0.3s, gap 0.2s;
+  }
+  .service-card:hover .service-arrow { color: white; gap: 10px; }
+
+  /* ── DOCTORS ── */
+  #doctors { padding: 100px 0; background: var(--offwhite); }
+  .doctors-header { text-align: center; margin-bottom: 64px; }
+  .doctors-header .section-label { justify-content: center; }
+  .doctors-header .section-sub { margin: 0 auto; text-align: center; }
+  .doctors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .doctor-card {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .doctor-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+  .doctor-img {
+    height: 260px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #0a2342, #2e86c1);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .doctor-avatar {
+    width: 110px; height: 110px; border-radius: 50%;
+    background: rgba(255,255,255,0.15); border: 3px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center; font-size: 52px;
+  }
+  .doctor-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,35,66,0.7) 0%, transparent 60%);
+  }
+  .doctor-chip {
+    position: absolute; bottom: 16px; left: 16px;
+    background: var(--teal); color: white;
+    padding: 4px 12px; border-radius: 100px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  }
+  .doctor-info { padding: 24px 26px 28px; }
+  .doctor-info h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px; font-family: 'Cormorant Garamond', serif; }
+  .doctor-spec { font-size: 12px; color: var(--sky); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .doctor-info p { font-size: 13px; color: var(--subtext); line-height: 1.65; }
+  .doctor-divider { width: 40px; height: 2px; background: var(--gold); border-radius: 2px; margin: 14px 0; }
+  .doctor-meta { display: flex; gap: 16px; }
+  .doctor-meta span { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+
+  /* ── GALLERY ── */
+  #gallery { padding: 100px 0; }
+  .gallery-header { text-align: center; margin-bottom: 64px; }
+  .gallery-header .section-label { justify-content: center; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+  .gallery-item {
+    border-radius: 16px; overflow: hidden; position: relative;
+    background: var(--light);
+    cursor: pointer; group: true;
+  }
+  .gallery-item.large { grid-column: span 2; }
+  .gallery-placeholder {
+    width: 100%; height: 220px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; position: relative; overflow: hidden;
+    transition: transform 0.4s;
+  }
+  .gallery-item.large .gallery-placeholder { height: 290px; }
+  .gallery-item:hover .gallery-placeholder { transform: scale(1.04); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: rgba(10,35,66,0.55);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay span { font-size: 28px; color: white; }
+  .gallery-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(10,35,66,0.9), transparent);
+    padding: 20px 16px 14px;
+    font-size: 13px; font-weight: 600; color: white; letter-spacing: 0.3px;
+    transform: translateY(100%); transition: transform 0.3s;
+  }
+  .gallery-item:hover .gallery-label { transform: translateY(0); }
+
+  /* ── LOCATION ── */
+  #location { padding: 100px 0; background: var(--navy); position: relative; overflow: hidden; }
+  #location::before {
+    content: ''; position: absolute;
+    top: -150px; left: -150px; width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,134,193,0.15), transparent 70%);
+  }
+  #location::after {
+    content: ''; position: absolute;
+    bottom: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,188,156,0.1), transparent 70%);
+  }
+  .location-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; position: relative; z-index: 1; }
+  .location-content .section-title { color: white; }
+  .location-content .section-sub { color: rgba(255,255,255,0.65); }
+  .location-details { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+  .location-item {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 20px; border-radius: 14px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s;
+  }
+  .location-item:hover { background: rgba(255,255,255,0.1); }
+  .location-item-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    background: rgba(46,134,193,0.2); border: 1px solid rgba(46,134,193,0.3);
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+  }
+  .location-item h4 { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .location-item p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+  .location-item a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s; }
+  .location-item a:hover { color: var(--teal); }
+  .map-wrapper {
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 24px 72px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+  .map-wrapper iframe { display: block; width: 100%; height: 420px; }
+  .map-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: white; border-radius: 12px; padding: 10px 16px;
+    display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    font-size: 13px; font-weight: 600; color: var(--navy);
+  }
+
+  /* ── APPOINTMENT CTA ── */
+  #cta {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--sky) 0%, var(--navy) 100%);
+    position: relative; overflow: hidden; text-align: center;
+  }
+  #cta::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(26,188,156,0.2) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  }
+  .cta-inner { position: relative; z-index: 1; }
+  .cta-inner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem); color: white; font-weight: 600; margin-bottom: 16px;
+  }
+  .cta-inner p { font-size: 1rem; color: rgba(255,255,255,0.75); margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .cta-btn-main {
+    background: white; color: var(--navy);
+    padding: 16px 36px; border-radius: 12px;
+    font-weight: 700; font-size: 15px; text-decoration: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .cta-btn-main:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
+  .cta-phone {
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    color: white; padding: 16px 32px; border-radius: 12px;
+    font-weight: 600; font-size: 15px; text-decoration: none;
+    backdrop-filter: blur(8px);
+    transition: background 0.2s, transform 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .cta-phone:hover { background: rgba(255,255,255,0.25); transform: translateY(-3px); }
+
+  /* ── FOOTER ── */
+  footer { background: #060f1a; padding: 60px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.75; margin-top: 16px; max-width: 280px; }
+  .footer-col h4 { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--teal); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+  .footer-socials { display: flex; gap: 12px; }
+  .footer-social {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center;
+    font-size: 15px; color: rgba(255,255,255,0.5);
+    transition: background 0.2s, color 0.2s; text-decoration: none;
+  }
+  .footer-social:hover { background: var(--sky); color: white; }
+  .footer-badge { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+  .footer-badge span { font-size: 11px; color: rgba(255,255,255,0.3); }
+  .footer-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
+
+  /* ── MOBILE MENU ── */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(10,35,66,0.97); backdrop-filter: blur(16px);
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px;
+    transition: opacity 0.3s;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 1.5rem; font-family: 'Cormorant Garamond', serif;
+    color: rgba(255,255,255,0.85); text-decoration: none; padding: 12px 40px;
+    border-radius: 12px; transition: color 0.2s, background 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--teal); background: rgba(255,255,255,0.05); }
+  .mobile-close {
+    position: absolute; top: 20px; right: 24px;
+    font-size: 28px; color: rgba(255,255,255,0.6); cursor: pointer; background: none; border: none; padding: 8px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .hero-btns { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .hero-visual { display: none; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-badge-float { bottom: 0; right: 0; }
+    .doctors-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item.large { grid-column: span 2; }
+    .location-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats { flex-direction: column; align-items: center; }
+    .hero-stat { width: 100%; max-width: 200px; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item.large { grid-column: span 1; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .cta-btns { flex-direction: column; align-items: center; }
+  }
+
+  /* ── GALLERY COLORS ── */
+  .g1 { background: linear-gradient(135deg, #1a5276, #2e86c1); }
+  .g2 { background: linear-gradient(135deg, #0a2342, #1abc9c); }
+  .g3 { background: linear-gradient(135deg, #2e86c1, #1abc9c); }
+  .g4 { background: linear-gradient(135deg, #1a5276, #0a2342); }
+  .g5 { background: linear-gradient(135deg, #1abc9c, #2e86c1); }
+  .g6 { background: linear-gradient(135deg, #0a2342, #2e86c1); }
+
+  /* Stagger delays */
+  .stagger-1 { transition-delay: 0.1s !important; }
+  .stagger-2 { transition-delay: 0.2s !important; }
+  .stagger-3 { transition-delay: 0.3s !important; }
+  .stagger-4 { transition-delay: 0.4s !important; }
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#doctors" onclick="closeMobileMenu()">Doctors</a>
+  <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+  <a href="#location" onclick="closeMobileMenu()">Location</a>
+  <a href="tel:+91-XXXXXXXXXX" onclick="closeMobileMenu()" style="color:#7eecd0; margin-top:8px;">📞 Book Appointment</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">🏥</div>
+      <div class="nav-logo-text">
+        <strong>Airah Hospital</strong>
+        <span>Multi-Speciality & Maternity Care</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#location">Location</a>
+      <a href="tel:+91-XXXXXXXXXX" class="nav-cta">Book Appointment</a>
+    </div>
+    <div class="hamburger" onclick="openMobileMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-svg-bg"></div>
+  <div class="hero-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">✦ Trusted Healthcare in Nuh, Haryana</div>
+      <h1 class="hero-title">
+        Your Health,<br>Our <em>Highest</em><br>Priority
+      </h1>
+      <p class="hero-subtitle">
+        Airah Hospital delivers world-class multi-speciality and maternity care with advanced facilities, compassionate doctors, and a patient-first approach — right here in Nuh.
+      </p>
+      <div class="hero-btns">
+        <a href="tel:+91-XXXXXXXXXX" class="btn-primary">📅 Book Appointment</a>
+        <a href="#about" class="btn-outline">Explore Hospital →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>5000+</strong><span>Patients Served</span></div>
+        <div class="hero-stat"><strong>15+</strong><span>Specialists</span></div>
+        <div class="hero-stat"><strong>24/7</strong><span>Emergency Care</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-main">
+        <h3>🟢 Emergency Department — Open 24/7</h3>
+        <p>Our emergency team is always ready. Immediate care for critical conditions, round the clock.</p>
+      </div>
+      <div class="hero-cards-row">
+        <div class="hero-mini-card">
+          <span class="icon">🤱</span>
+          <strong>Maternity & NICU</strong>
+          <span>Advanced care for mothers & newborns</span>
+        </div>
+        <div class="hero-mini-card">
+          <span class="icon">🔬</span>
+          <strong>Diagnostic Lab</strong>
+          <span>Accurate reports, fast turnaround</span>
+        </div>
+        <div class="hero-mini-card">
+          <span class="icon">💊</span>
+          <strong>In-house Pharmacy</strong>
+          <span>Medicines available on-site</span>
+        </div>
+        <div class="hero-mini-card">
+          <span class="icon">🚑</span>
+          <strong>Ambulance Service</strong>
+          <span>Quick response anywhere in Nuh</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-bar-inner" id="trustBar">
+      <div class="trust-item"><span>✦</span> Government Certified Hospital</div>
+      <div class="trust-item"><span>✦</span> 24/7 Emergency Services</div>
+      <div class="trust-item"><span>✦</span> Experienced Specialists</div>
+      <div class="trust-item"><span>✦</span> Modern Operation Theatre</div>
+      <div class="trust-item"><span>✦</span> Advanced Maternity Care</div>
+      <div class="trust-item"><span>✦</span> Affordable Treatment Plans</div>
+      <div class="trust-item"><span>✦</span> In-house Diagnostic Lab</div>
+      <div class="trust-item"><span>✦</span> Dedicated Pharmacy</div>
+      <!-- duplicate for seamless loop -->
+      <div class="trust-item"><span>✦</span> Government Certified Hospital</div>
+      <div class="trust-item"><span>✦</span> 24/7 Emergency Services</div>
+      <div class="trust-item"><span>✦</span> Experienced Specialists</div>
+      <div class="trust-item"><span>✦</span> Modern Operation Theatre</div>
+      <div class="trust-item"><span>✦</span> Advanced Maternity Care</div>
+      <div class="trust-item"><span>✦</span> Affordable Treatment Plans</div>
+      <div class="trust-item"><span>✦</span> In-house Diagnostic Lab</div>
+      <div class="trust-item"><span>✦</span> Dedicated Pharmacy</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal-left">
+        <div class="about-img-wrapper">
+          <div class="about-img-placeholder">
+            <div class="big-icon">🏥</div>
+            <p>Airah Hospital — Nuh, Haryana</p>
+          </div>
+        </div>
+        <div class="about-badge-float">
+          <div class="icon-circle">🏆</div>
+          <div>
+            <div class="num">10+</div>
+            <div class="lbl">Years of Trusted Care</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-content reveal-right">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">Compassionate Care,<br>Modern Medicine</h2>
+        <p class="section-sub">
+          Airah Hospital is Nuh's leading multi-speciality and maternity care centre. We combine advanced medical technology with a patient-first philosophy to deliver healthcare that is both effective and compassionate.
+        </p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon">🏗️</div>
+            <div>
+              <h4>State-of-the-Art Facilities</h4>
+              <p>Modern operation theatres, ICU, NICU, and well-equipped patient wards designed for comfort and recovery.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">👩‍⚕️</div>
+            <div>
+              <h4>Expert Medical Team</h4>
+              <p>A panel of experienced doctors, nurses, and paramedical staff providing round-the-clock care.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">💙</div>
+            <div>
+              <h4>Patient-First Philosophy</h4>
+              <p>We believe every patient deserves dignified, attentive, and affordable healthcare — no exceptions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">Our Services</div>
+      <h2 class="section-title reveal">Comprehensive Care Under One Roof</h2>
+      <p class="section-sub reveal">From emergency medicine to maternity care, our specialists are equipped to handle every health need with precision and compassion.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal stagger-1">
+        <div class="service-icon">🤱</div>
+        <h3>Maternity & Obstetrics</h3>
+        <p>Complete pregnancy care, safe deliveries, postnatal support, and NICU for premature or high-risk newborns.</p>
+        <div class="service-arrow">Learn more →</div>
+      </div>
+      <div class="service-card reveal stagger-2">
+        <div class="service-icon">🚑</div>
+        <h3>Emergency & Trauma</h3>
+        <p>24/7 emergency department with rapid triage, trauma management, and critical care stabilization.</p>
+        <div class="service-arrow">Learn more →</div>
+      </div>
+      <div class="service-card reveal stagger-3">
+        <div class="service-icon">🫀</div>
+        <h3>General Medicine</h3>
+        <p>Diagnosis and treatment of acute and chronic illnesses including fever, infections, diabetes, and hypertension.</p>
+        <div class="service-arrow">Learn more →</div>
+      </div>
+      <div class="service-card reveal stagger-4">
+        <div class="service-icon">🦴</div>
+        <h3>Orthopaedics</h3>
+        <p>Bone, joint, and musculoskeletal care — from fracture management to orthopaedic surgery and physiotherapy.</p>
+        <div class="service-arrow">Learn more →</div>
+      </div>
+      <div class="service-card reveal stagger-1">
+        <div class="service-icon">👶</div>
+        <h3>Paediatrics</h3>
+        <p>Dedicated child healthcare from newborn check-ups to adolescent medicine, vaccinations, and nutrition.</p>
+        <div class="service-arrow">Learn more →</div>
+      </div>
+      <div class="service-card reveal stagger-2">
+        <div class="service-icon">🔬</div>
+        <h3>Diagnostics & Pathology</h3>
+        <p>In-house laboratory for blood tests, urine analysis, imaging studies, and accurate rapid diagnostics.</p>
+        <div class="service-arrow">Learn more →</div>
+      </div>
+      <div class="service-card reveal stagger-3">
+        <div class="service-icon">🩺</div>
+        <h3>Gynaecology</h3>
+        <p>Comprehensive women's health including gynaecological screenings, treatments, and minimally invasive surgeries.</p>
+        <div class="service-arrow">Learn more →</div>
+      </div>
+      <div class="service-card reveal stagger-4">
+        <div class="service-icon">💊</div>
+        <h3>In-house Pharmacy</h3>
+        <p>A fully stocked pharmacy within the hospital — medicines, surgical supplies, and health products all in one place.</p>
+        <div class="service-arrow">Learn more →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section id="doctors">
+  <div class="container">
+    <div class="doctors-header">
+      <div class="section-label">Our Doctors</div>
+      <h2 class="section-title reveal">Meet Our Expert Team</h2>
+      <p class="section-sub reveal">Our panel of skilled and compassionate doctors brings years of expertise across multiple specialisations to serve the community of Nuh.</p>
+    </div>
+    <div class="doctors-grid">
+      <div class="doctor-card reveal stagger-1">
+        <div class="doctor-img">
+          <div class="doctor-avatar">👨‍⚕️</div>
+          <div class="doctor-img-overlay"></div>
+          <div class="doctor-chip">General Medicine</div>
+        </div>
+        <div class="doctor-info">
+          <h3>Dr. Mohammad Arif</h3>
+          <div class="doctor-spec">MBBS, MD – General Physician</div>
+          <div class="doctor-divider"></div>
+          <p>With over 12 years of clinical experience, Dr. Arif leads the general medicine department with expertise in infectious disease and chronic illness management.</p>
+          <div class="doctor-meta">
+            <span>⏱ 12+ Years Exp.</span>
+            <span>📍 Available Daily</span>
+          </div>
+        </div>
+      </div>
+      <div class="doctor-card reveal stagger-2">
+        <div class="doctor-img" style="background: linear-gradient(135deg, #0a3d2b, #1abc9c);">
+          <div class="doctor-avatar">👩‍⚕️</div>
+          <div class="doctor-img-overlay"></div>
+          <div class="doctor-chip">Gynaecology & Obstetrics</div>
+        </div>
+        <div class="doctor-info">
+          <h3>Dr. Saira Bano</h3>
+          <div class="doctor-spec">MBBS, MS – Gynaecologist & Obstetrician</div>
+          <div class="doctor-divider"></div>
+          <p>Dr. Saira specialises in high-risk pregnancies, normal and caesarean deliveries, and advanced laparoscopic gynaecological procedures.</p>
+          <div class="doctor-meta">
+            <span>⏱ 10+ Years Exp.</span>
+            <span>📍 Mon–Sat</span>
+          </div>
+        </div>
+      </div>
+      <div class="doctor-card reveal stagger-3">
+        <div class="doctor-img" style="background: linear-gradient(135deg, #1a0a42, #7048c1);">
+          <div class="doctor-avatar">👨‍⚕️</div>
+          <div class="doctor-img-overlay"></div>
+          <div class="doctor-chip">Orthopaedics</div>
+        </div>
+        <div class="doctor-info">
+          <h3>Dr. Rahul Sharma</h3>
+          <div class="doctor-spec">MBBS, MS Ortho – Orthopaedic Surgeon</div>
+          <div class="doctor-divider"></div>
+          <p>Dr. Rahul handles complex fractures, joint replacements, and sports injuries, bringing precision surgical skills to every case.</p>
+          <div class="doctor-meta">
+            <span>⏱ 8+ Years Exp.</span>
+            <span>📍 Tue, Thu, Sat</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="gallery-header">
+      <div class="section-label">Our Facility</div>
+      <h2 class="section-title reveal">A Glimpse Inside Airah Hospital</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item large reveal">
+        <div class="gallery-placeholder g1">
+          <span style="font-size: 4rem; opacity: 0.35;">🏥</span>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px;">Hospital Building</p>
+        </div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+        <div class="gallery-label">Hospital Building — Main Entrance</div>
+      </div>
+      <div class="gallery-item reveal">
+        <div class="gallery-placeholder g2">
+          <span style="font-size: 3rem; opacity: 0.35;">🛏️</span>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px;">Patient Wards</p>
+        </div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+        <div class="gallery-label">Patient Wards & Rooms</div>
+      </div>
+      <div class="gallery-item reveal">
+        <div class="gallery-placeholder g3">
+          <span style="font-size: 3rem; opacity: 0.35;">🏛️</span>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px;">Reception</p>
+        </div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+        <div class="gallery-label">Reception & Waiting Area</div>
+      </div>
+      <div class="gallery-item reveal">
+        <div class="gallery-placeholder g4">
+          <span style="font-size: 3rem; opacity: 0.35;">🔬</span>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px;">Laboratory</p>
+        </div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+        <div class="gallery-label">Diagnostic Laboratory</div>
+      </div>
+      <div class="gallery-item large reveal">
+        <div class="gallery-placeholder g5">
+          <span style="font-size: 4rem; opacity: 0.35;">💊</span>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px;">Pharmacy</p>
+        </div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+        <div class="gallery-label">In-house Medical Shop & Pharmacy</div>
+      </div>
+      <div class="gallery-item reveal">
+        <div class="gallery-placeholder g6">
+          <span style="font-size: 3rem; opacity: 0.35;">🩺</span>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px;">OPD</p>
+        </div>
+        <div class="gallery-overlay"><span>🔍</span></div>
+        <div class="gallery-label">Consultation & OPD</div>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 20px; font-size: 13px; color: var(--muted);">
+      📸 Add real hospital photos to replace the placeholders above
+    </p>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="container">
+    <div class="location-grid">
+      <div class="location-content reveal-left">
+        <div class="section-label" style="color: var(--teal);">Find Us</div>
+        <h2 class="section-title">Visit Airah Hospital</h2>
+        <p class="section-sub">We are conveniently located on the Nuh–Hodal Road. Our team is ready to welcome you and your family.</p>
+        <div class="location-details">
+          <div class="location-item">
+            <div class="location-item-icon">📍</div>
+            <div>
+              <h4>Address</h4>
+              <p>MDR 132, Nuh–Hodal Road,<br>Near JCB Workshop, Nuh,<br>Haryana – 122107</p>
+            </div>
+          </div>
+          <div class="location-item">
+            <div class="location-item-icon">📞</div>
+            <div>
+              <h4>Phone</h4>
+              <p><a href="tel:+91XXXXXXXXXX">+91-XXXX-XXXXXX</a> (General)<br><a href="tel:+91XXXXXXXXXX">+91-XXXX-XXXXXX</a> (Emergency 24/7)</p>
+            </div>
+          </div>
+          <div class="location-item">
+            <div class="location-item-icon">✉️</div>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:info@airahhospital.in">info@airahhospital.in</a></p>
+            </div>
+          </div>
+          <div class="location-item">
+            <div class="location-item-icon">⏰</div>
+            <div>
+              <h4>Working Hours</h4>
+              <p>OPD: Mon–Sat, 8:00 AM – 8:00 PM<br>Emergency: Open 24 hours, 7 days</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right" style="position: relative; z-index: 1;">
+        <div class="map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3527.7281055946287!2d77.0047!3d28.1030!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sNuh%2C+Haryana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            width="100%" height="420"
+            style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <div class="map-badge">📍 Airah Hospital, Nuh</div>
+        </div>
+        <div style="margin-top: 16px; display: flex; gap: 12px;">
+          <a href="https://maps.google.com/?q=Nuh,Haryana" target="_blank"
+            style="flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 600;
+            text-decoration: none; transition: background 0.2s;"
+            onmouseover="this.style.background='rgba(255,255,255,0.18)'"
+            onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+            🗺️ Open in Google Maps
+          </a>
+          <a href="tel:+91XXXXXXXXXX"
+            style="flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+            background: var(--teal); color: white; padding: 14px; border-radius: 12px;
+            font-size: 14px; font-weight: 600; text-decoration: none; transition: opacity 0.2s;"
+            onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            📞 Call Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2>Ready to Book an Appointment?</h2>
+      <p>Our medical team is here for you — walk in or call ahead. Quality healthcare, without the wait.</p>
+      <div class="cta-btns">
+        <a href="tel:+91XXXXXXXXXX" class="cta-btn-main">📅 Book Appointment</a>
+        <a href="#location" class="cta-phone">📍 Get Directions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="text-decoration:none; display:inline-flex; align-items:center; gap:12px; margin-bottom:4px;">
+          <div class="nav-logo-icon">🏥</div>
+          <div class="nav-logo-text">
+            <strong style="color:white;">Airah Hospital</strong>
+            <span>Multi-Speciality & Maternity Care</span>
+          </div>
+        </a>
+        <p>Delivering compassionate, modern healthcare to Nuh and surrounding communities since our founding. Your health is our promise.</p>
+        <div class="footer-badge">
+          <div class="dot"></div>
+          <span>Certified & Registered Hospital</span>
+          <div class="dot"></div>
+          <span>Haryana Health Dept.</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Maternity Care</a></li>
+          <li><a href="#services">Emergency</a></li>
+          <li><a href="#services">General Medicine</a></li>
+          <li><a href="#services">Orthopaedics</a></li>
+          <li><a href="#services">Paediatrics</a></li>
+          <li><a href="#services">Diagnostics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#doctors">Our Doctors</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="tel:+91XXXXXXXXXX">Book Appointment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">MDR 132, Nuh–Hodal Road</a></li>
+          <li><a href="#">Nuh, Haryana – 122107</a></li>
+          <li><a href="tel:+91XXXXXXXXXX">+91-XXXX-XXXXXX</a></li>
+          <li><a href="mailto:info@airahhospital.in">info@airahhospital.in</a></li>
+          <li><a href="#">Emergency: 24/7</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Airah Hospital. All rights reserved. | Multi-Speciality & Maternity Care Centre, Nuh</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social">📘</a>
+        <a href="#" class="footer-social">📸</a>
+        <a href="#" class="footer-social">▶️</a>
+        <a href="https://wa.me/91XXXXXXXXXX" class="footer-social">💬</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── NAVBAR SCROLL ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+
+  // ── MOBILE MENU ──
+  function openMobileMenu() { document.getElementById('mobileMenu').classList.add('open'); }
+  function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+  // ── INTERSECTION OBSERVER ──
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── SMOOTH ANCHOR SCROLL ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      const el = document.querySelector(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // ── GALLERY LIGHTBOX (simple) ──
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const label = item.querySelector('.gallery-label')?.textContent || 'Hospital Gallery';
+      const overlay = document.createElement('div');
+      overlay.style.cssText = `
+        position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.92);
+        display:flex; align-items:center; justify-content:center; cursor:pointer;
+        animation: fadeIn 0.3s ease;
+      `;
+      overlay.innerHTML = `
+        <div style="text-align:center; max-width:600px; padding:24px;">
+          <div style="font-size:80px; margin-bottom:20px; opacity:0.7;">🏥</div>
+          <p style="color:white; font-size:1.2rem; font-family:'Cormorant Garamond',serif; margin-bottom:8px;">${label}</p>
+          <p style="color:rgba(255,255,255,0.45); font-size:13px;">Airah Hospital — Nuh, Haryana</p>
+          <p style="color:rgba(255,255,255,0.3); font-size:12px; margin-top:24px;">Click anywhere to close · Add real photos for best results</p>
+        </div>
+      `;
+      overlay.addEventListener('click', () => overlay.remove());
+      document.body.appendChild(overlay);
+    });
+  });
+
+  // Inject keyframes for lightbox
+  const style = document.createElement('style');
+  style.textContent = `@keyframes fadeIn { from{opacity:0} to{opacity:1} }`;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
